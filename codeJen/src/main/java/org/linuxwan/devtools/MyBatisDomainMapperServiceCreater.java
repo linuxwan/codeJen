@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -23,14 +25,14 @@ import org.slf4j.LoggerFactory;
 public class MyBatisDomainMapperServiceCreater {
 	private static final Logger logger = LoggerFactory.getLogger(MyBatisDomainMapperServiceCreater.class);
 	private static String SCHEMA = "gw";
-	private static String DOMAIN = "org.uniworks.groupware.domain";
-	private static String MAPPER = "org.uniworks.groupware.mapper";
-	private static String SERVICE = "org.uniworks.groupware.service";
-	private static String SERVICE_INTERNAL = "org.uniworks.groupware.service.internal";
-	private static String DOMAIN_PATH = "d:/temp/domain";
-	private static String MAPPER_PATH = "d:/temp/mapper";
-	private static String SERVICE_PATH = "d:/temp/service";
-	private static String SERVICE_INTERNAL_PATH = "d:/temp/service/internal";
+	private static String DOMAIN = "org.uniworks.groupware.admin.domain";
+	private static String MAPPER = "org.uniworks.groupware.admin.mapper";
+	private static String SERVICE = "org.uniworks.groupware.admin.service";
+	private static String SERVICE_INTERNAL = "org.uniworks.groupware.admin.service.internal";
+	private static String DOMAIN_PATH = "d:/temp/admin/domain";
+	private static String MAPPER_PATH = "d:/temp/admin/mapper";
+	private static String SERVICE_PATH = "d:/temp/admin/service";
+	private static String SERVICE_INTERNAL_PATH = "d:/temp/admin/service/internal";
 	Connection jdbcConnection = null;
 	
 	/**
@@ -107,7 +109,9 @@ public class MyBatisDomainMapperServiceCreater {
 				colProperty.setNullable(columns.getInt("NULLABLE"));
 				
 				columnList.add(colProperty);
-			}
+			}						
+			
+			Collections.sort(columnList, new ResultSetSorting());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -232,5 +236,15 @@ public class MyBatisDomainMapperServiceCreater {
 		createMapperClassFiles();	//Mapper Class 생성.
 		createServiceInterfaceFiles();	//Service Interface 생성.
 		createServiceInterfaceImplFiles();	//Service Interface Impl Class 생성.		
+	}
+	
+	class ResultSetSorting implements Comparator<ColumnProperty> {
+		@Override
+		public int compare(ColumnProperty result1, ColumnProperty result2) {
+			Integer res1 = result1.getOrdinalPosition();
+			Integer res2 = result2.getOrdinalPosition();			
+			
+			return res1.compareTo(res2);
+		}
 	}
 }

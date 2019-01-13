@@ -39,10 +39,10 @@ public class SqlTypeConvertToJava {
 		map.put("LONGVARBINARY", "byte[]");
 		map.put("MEDIUMTEXT", "String");
 		map.put("LONGTEXT", "String");
-		map.put("DATE", "java.sql.Date");
-		map.put("TIME", "java.sql.Time");
-		map.put("TIMESTAMP", "java.sql.Timestamp");
-		map.put("DATETIME", "java.sql.Timestamp");
+		map.put("DATE", "java.util.Date");
+		map.put("TIME", "java.util.Time");
+		map.put("TIMESTAMP", "java.util.Date");
+		map.put("DATETIME", "java.util.Date");
 		map.put("CLOB", "java.sql.Clob");
 		map.put("BLOB", "java.sql.Blob");
 		map.put("MEDIUMBLOB", "byte[]");		
@@ -73,7 +73,7 @@ public class SqlTypeConvertToJava {
 		String javaType = map.get(sqlType);
 		
 		if (sqlType.equalsIgnoreCase("DATETIME")) {
-			javaType = "TIMESTAMP";
+			javaType = "DATE";
 		}
 		
 		return javaType;

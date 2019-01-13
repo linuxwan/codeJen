@@ -87,6 +87,7 @@ public class ServiceInterfaceImplClassCreate {
 		strBuffer.append("\t */ \r\n");
 		strBuffer.append("\t@Override \r\n");
 		strBuffer.append("\t@Transactional(readOnly = false, propagation = Propagation.REQUIRED) \r\n");
+		//strBuffer.append("\t@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class) \r\n");
 		strBuffer.append("\tpublic int" + " add" + firstUpperCaseConvert(domainClass) + "(" + firstUpperCaseConvert(domainClass) +  " " + domainClass + ") { \r\n");
 		strBuffer.append("\t\treturn " + domainClass + "Mapper.insert(" + domainClass + "); \r\n");
 		strBuffer.append("\t} \r\n");
@@ -98,6 +99,7 @@ public class ServiceInterfaceImplClassCreate {
 		strBuffer.append("\t */ \r\n");
 		strBuffer.append("\t@Override \r\n");
 		strBuffer.append("\t@Transactional(readOnly = false, propagation = Propagation.REQUIRED) \r\n");
+		//strBuffer.append("\t@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class) \r\n");
 		strBuffer.append("\tpublic int" + " update" + firstUpperCaseConvert(domainClass) + "(" + firstUpperCaseConvert(domainClass) + " " + domainClass + ") { \r\n");
 		strBuffer.append("\t\treturn " + domainClass + "Mapper.updateByPrimaryKey(" + domainClass + "); \r\n");
 		strBuffer.append("\t} \r\n");
@@ -109,6 +111,7 @@ public class ServiceInterfaceImplClassCreate {
 		strBuffer.append("\t */ \r\n");
 		strBuffer.append("\t@Override \r\n");
 		strBuffer.append("\t@Transactional(readOnly = false, propagation = Propagation.REQUIRED) \r\n");
+		//strBuffer.append("\t@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class) \r\n");
 		strBuffer.append("\tpublic int" + " delete" + firstUpperCaseConvert(domainClass) + "(Map<String, Object> map) { \r\n");
 		strBuffer.append("\t\treturn " + domainClass + "Mapper.deleteByPrimaryKey(map); \r\n");
 		strBuffer.append("\t} \r\n");
